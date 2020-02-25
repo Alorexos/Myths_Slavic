@@ -1,0 +1,843 @@
+fileFormatVersion: 2
+guid: 1a84e0d94fa6fa24eacd1e12f57bd4ab
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5129438802443955080
+    second: Favour_Rod_Spritesheet_0
+  - first:
+      213: 491905116735144634
+    second: Favour_Rod_Spritesheet_1
+  - first:
+      213: -3959757911546688396
+    second: Favour_Rod_Spritesheet_2
+  - first:
+      213: 3188019307969738481
+    second: Favour_Rod_Spritesheet_3
+  - first:
+      213: -2386069829094983449
+    second: Favour_Rod_Spritesheet_4
+  - first:
+      213: 342565249452291802
+    second: Favour_Rod_Spritesheet_5
+  - first:
+      213: -7633536838723684317
+    second: Favour_Rod_Spritesheet_6
+  - first:
+      213: 6944305462696897740
+    second: Favour_Rod_Spritesheet_7
+  - first:
+      213: -5669078406756619649
+    second: Favour_Rod_Spritesheet_8
+  - first:
+      213: -2153677729109300306
+    second: Favour_Rod_Spritesheet_9
+  - first:
+      213: -6676438835694587550
+    second: Favour_Rod_Spritesheet_10
+  - first:
+      213: 3777497670430190898
+    second: Favour_Rod_Spritesheet_11
+  - first:
+      213: -8961999678804213709
+    second: Favour_Rod_Spritesheet_12
+  - first:
+      213: 9180541162563886288
+    second: Favour_Rod_Spritesheet_13
+  - first:
+      213: -701668724632452380
+    second: Favour_Rod_Spritesheet_14
+  - first:
+      213: -3844324967014276546
+    second: Favour_Rod_Spritesheet_15
+  - first:
+      213: 2693284096756211256
+    second: Favour_Rod_Spritesheet_16
+  - first:
+      213: 4914173208777773209
+    second: Favour_Rod_Spritesheet_17
+  - first:
+      213: -2430643913781714674
+    second: Favour_Rod_Spritesheet_18
+  - first:
+      213: 3052596207150336180
+    second: Favour_Rod_Spritesheet_19
+  - first:
+      213: -7125961490891420664
+    second: Favour_Rod_Spritesheet_20
+  - first:
+      213: 3370183968685841425
+    second: Favour_Rod_Spritesheet_21
+  - first:
+      213: -785837480002913445
+    second: Favour_Rod_Spritesheet_22
+  - first:
+      213: -1556331180708438204
+    second: Favour_Rod_Spritesheet_23
+  - first:
+      213: 7601955593902729841
+    second: Favour_Rod_Spritesheet_24
+  - first:
+      213: -8713318469479247320
+    second: Favour_Rod_Spritesheet_25
+  - first:
+      213: -2047345426606572615
+    second: Favour_Rod_Spritesheet_26
+  - first:
+      213: 1795327342330125609
+    second: Favour_Rod_Spritesheet_27
+  - first:
+      213: 1626201491943139214
+    second: Favour_Rod_Spritesheet_28
+  - first:
+      213: -3400325746942651464
+    second: Favour_Rod_Spritesheet_29
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2900
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c0acf862a0dc354bb73c719310a2023
+      internalID: -5129438802443955080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2800
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2080dd992b63b8d4eaf84f3b60d75bd1
+      internalID: 491905116735144634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2700
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4fd400e7e57cc64caa83b9720163b69
+      internalID: -3959757911546688396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2600
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e83eed8ded63a414a9b883ea708e138a
+      internalID: 3188019307969738481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2500
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4be21eba29d81f7468164489ca4b2ca7
+      internalID: -2386069829094983449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2400
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4fe68feb39ea6247a9a41c9aa76855b
+      internalID: 342565249452291802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2300
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a41dfc0242c10c45917e2958fc5ba2b
+      internalID: -7633536838723684317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2200
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df7b264702ab232439a312e0dc5b11a5
+      internalID: 6944305462696897740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2100
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5deb7fc933cd22347a79ebe9456779f6
+      internalID: -5669078406756619649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2000
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1de4d25c3bb8cc14b95b5b59540071aa
+      internalID: -2153677729109300306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1900
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be5365d56067134d9e37ad2611c5d5b
+      internalID: -6676438835694587550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1800
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4173243b7052bc941821b45cd2ffe33f
+      internalID: 3777497670430190898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1700
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eb7433271ec8b243a9e0c33a6e8d50a
+      internalID: -8961999678804213709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1600
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8285130a39c5cac43adb84edb3d6d36d
+      internalID: 9180541162563886288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1500
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: babc30b6daf615740a12b2b85e4d59b1
+      internalID: -701668724632452380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1400
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d922cbc4fe0cdf4bb7779e6bd22b9d2
+      internalID: -3844324967014276546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1300
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fadbbd0a95bd2c444a09005d3bfbb9f5
+      internalID: 2693284096756211256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1200
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 697c12c8d253a554b8a2a9239bf0f119
+      internalID: 4914173208777773209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1100
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302945f873fd6a341babf90c92866ec6
+      internalID: -2430643913781714674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1000
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6915ccd3ba19c714f89279c7d14656d3
+      internalID: 3052596207150336180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 900
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5727b0870873164eafe49f626daf925
+      internalID: -7125961490891420664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 800
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0767c114bf0a5ec409d41b01b07ff31e
+      internalID: 3370183968685841425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 700
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4caa2414aeff9f94283eff483fa8281c
+      internalID: -785837480002913445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85bf177294e556949b9eab3c1ab42db5
+      internalID: -1556331180708438204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03eff3ab2947c3544821fea1180f5327
+      internalID: 7601955593902729841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b054581d3c50e11478a6442b907a4cd0
+      internalID: -8713318469479247320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e0661ca84ae18e4e92bc31af5ca7d36
+      internalID: -2047345426606572615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf3b61e5999b15f4d95a0ee742b8a70c
+      internalID: 1795327342330125609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f44ccb2817947a548964674102696243
+      internalID: 1626201491943139214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Favour_Rod_Spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1200
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d71fd0177dc838f4fbb06a588369db04
+      internalID: -3400325746942651464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 7ce3fa340858a4543a880145b20d21a3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
