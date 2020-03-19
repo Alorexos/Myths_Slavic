@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Camera-Control/Smooth Mouse Look")]
 public class Player : MonoBehaviour
 {
     Rigidbody rb;
     public float speed = 10.0f;
+    private 
 
     // Start is called before the first frame update
     void Start()
@@ -16,16 +16,6 @@ public class Player : MonoBehaviour
             rb.freezeRotation = true;
 
         originalRotation = transform.localRotation;
-
-    }
-
-    //--------------- Shrine Code ----------------
-    private void OnTriggerEnter(Collider shrine)
-    {
-        if (shrine.gameObject.tag != "Shrine") return;
-
-
-
     }
 
     //--------------- Movement Code ----------------
