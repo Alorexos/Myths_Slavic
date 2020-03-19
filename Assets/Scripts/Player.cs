@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rigidbody rb;
+    Animator playeranim;
     public float speed = 10.0f;
     private 
 
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb)
             rb.freezeRotation = true;
-
+        playeranim = GetComponent<Animator>();
         originalRotation = transform.localRotation;
     }
 
@@ -160,10 +161,24 @@ public class Player : MonoBehaviour
             rb.velocity = -transform.right * speed;
         }
 
+
+        // Forward 
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            playeranim.SetTrigger("Walk_Forward");
+        }
         if (Input.GetKey(KeyCode.W))
         {
             rb.velocity = transform.forward * speed;
         }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            playeranim.SetTrigger("Halt");
+        }
+
+
+
+        // Backwards
         if (Input.GetKey(KeyCode.S))
         {
             rb.velocity = -transform.forward * speed;
