@@ -5,11 +5,11 @@ using UnityEngine;
 public class Shrine : MonoBehaviour
 {
     public string Type;
-    private Player player;
+    private PlayerStats p_sPlayerStats;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Player>();
+        p_sPlayerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame

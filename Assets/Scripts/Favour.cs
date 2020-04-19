@@ -1,76 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Favour : MonoBehaviour
 {
-    private bool Visible;
-    private Canvas Canvas;
-    private RectTransform FavourRod;
-    private Dictionary<string,GodFavour> gods;
-    private Vector3 temp;
-    public Text FavourUI;
-    
+    public float MaxPosition;
+    public float MinPosition;
+    public float ZeroPosition;
+
+
+    private float fFavour;
+    private RectTransform rtBar;
+    public float fIncPos;
+    public float fDecPos;
     // Start is called before the first frame update
     void Start()
     {
-        gods = new Dictionary<string,GodFavour>();
-        gods.Add("Rod",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-        //gods.Add("Pierun",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Veles",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Stribug",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Svarog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Dazbog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-        //gods.Add("Jutrobog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-        //gods.Add("Belobog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Chernobog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Svetovid",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-        FavourUI = GameObject.Find("Text").GetComponent<Text>();
-        Canvas = GetComponent<Canvas>();
+        fIncPos = (Mathf.Abs(MaxPosition) + Mathf.Abs(ZeroPosition)) / 100;
+        fDecPos = fIncPos * -1;
+        rtBar = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.G))
-        {
-            if (Visible)
-            {
-                Hide();
-                Visible = false;
-            }
-            else
-            {
-                Display();
-                Visible = true;
-            }
-        }
-
-        if (Input.GetKeyUp(KeyCode.M))
-        {
-            gods["Rod"].IncreaseFavour(1.0f);
-        }
-        if (Input.GetKeyUp(KeyCode.N))
-        {
-            gods["Rod"].DecreaseFavour(1.0f);
-        }
-    }
-    void Hide()
-    {
-        Canvas.enabled = false;
+        
     }
 
-    void Display()
+    public float GetFavour()
     {
-        FavourUI.text = null;
-        foreach (KeyValuePair<string,GodFavour> attachStat in gods)
-        {
-            FavourUI.text = FavourUI.text
-                          + attachStat.Key + ": "
-                          + attachStat.Value.GetFavour().ToString()
-                          + "\n";
-        }
-        Canvas.enabled = true;
+        return fFavour;
+    }
+
+    public void IncreaseFavour(float Val)
+    {
+
+        fFavour += Val;
+        rtBar.localPosition = new Vector3(rtBar.localPosition.x + Val * fIncPos, rtBar.localPosition.y, rtBar.localPosition.z);
+    }
+    public void DecreaseFavour(float Val)
+    {
+
+        fFavour -= Val;
+        rtBar.localPosition = new Vector3(rtBar.localPosition.x + Val * fDecPos, rtBar.localPosition.y, rtBar.localPosition.z);
     }
 }

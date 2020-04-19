@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     Animator playeranim;
-    public float speed = 10.0f;
-    private 
+    public float speed = 10.0f; 
 
     // Start is called before the first frame update
     void Start()
@@ -182,6 +181,11 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             rb.velocity = -transform.forward * speed;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            playeranim.SetTrigger("Attack");
         }
     }
 }
