@@ -17,16 +17,16 @@ public class FavourController : MonoBehaviour
     {
         gods = new Dictionary<string,Favour>();
         gods.Add("Rod",GameObject.Find("FavourRod").GetComponent<Favour>());
-        //gods.Add("Pierun",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Veles",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Stribug",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Svarog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Dazbog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-        //gods.Add("Jutrobog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-        //gods.Add("Belobog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Chernobog",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-       // gods.Add("Svetovid",GameObject.Find("FavourRod").GetComponent<GodFavour>());
-        FavourUI = GameObject.Find("Text").GetComponent<Text>();
+        gods.Add("Pierun",GameObject.Find("FavourPierun").GetComponent<Favour>());
+        gods.Add("Veles",GameObject.Find("FavourVeles").GetComponent<Favour>());
+        gods.Add("Stribog",GameObject.Find("FavourStribog").GetComponent<Favour>());
+        gods.Add("Svarog",GameObject.Find("FavourSvarog").GetComponent<Favour>());
+        gods.Add("Dazbog",GameObject.Find("FavourDazbog").GetComponent<Favour>());
+        gods.Add("Jutrobog",GameObject.Find("FavourJutrobog").GetComponent<Favour>());
+        gods.Add("Belobog",GameObject.Find("FavourBelobog").GetComponent<Favour>());
+        gods.Add("Chernobog",GameObject.Find("FavourChernobog").GetComponent<Favour>());
+        gods.Add("Svetovid",GameObject.Find("FavourSvetovid").GetComponent<Favour>());
+        FavourUI = GameObject.Find("FavourText").GetComponent<Text>();
         Canvas = GetComponent<Canvas>();
     }
 
@@ -49,11 +49,11 @@ public class FavourController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.M))
         {
-            gods["Rod"].IncreaseFavour(1.0f);
+            gods["Veles"].IncreaseFavour(1.0f);
         }
         if (Input.GetKeyUp(KeyCode.N))
         {
-            gods["Rod"].DecreaseFavour(1.0f);
+            gods["Veles"].DecreaseFavour(1.0f);
         }
     }
     void Hide()

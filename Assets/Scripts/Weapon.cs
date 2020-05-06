@@ -9,7 +9,8 @@ public class Weapon : MonoBehaviour
     public int BaseMaxdamage;
 
     private Monster p_sMonster;
-    private PlayerStats p_sPlayerStats; 
+    private PlayerStats p_sPlayerStats;
+    private string ExDmgType;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +29,10 @@ public class Weapon : MonoBehaviour
         if (other.gameObject.tag != "Monster") return;
 
         p_sMonster = other.GetComponent<Monster>();
-        p_sMonster.fntDamage(Random.Range(BaseMinDamage,BaseMaxdamage),"PHYSICAL");
-        p_sMonster.fntDamage(2,"FIRE");
-
+        p_sMonster.fntDamage(Random.Range(BaseMinDamage,BaseMaxdamage));
+        if (ExDmgType != "")
+        {
+            p_sMonster.fntDamage(2, "FIRE");
+        }
     }
 }

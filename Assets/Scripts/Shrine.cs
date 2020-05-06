@@ -6,6 +6,7 @@ public class Shrine : MonoBehaviour
 {
     public string Type;
     private PlayerStats p_sPlayerStats;
+    private Weapon p_sWeapon;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +19,9 @@ public class Shrine : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Player") return;
-
 
 
 

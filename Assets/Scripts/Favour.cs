@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Favour : MonoBehaviour
 {
-    public float MaxPosition;
-    public float MinPosition;
-    public float ZeroPosition;
-
 
     private float fFavour;
     private RectTransform rtBar;
@@ -16,9 +12,11 @@ public class Favour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fIncPos = (Mathf.Abs(MaxPosition) + Mathf.Abs(ZeroPosition)) / 100;
-        fDecPos = fIncPos * -1;
         rtBar = GetComponent<RectTransform>();
+        Debug.Log(rtBar.rect.width);
+        fIncPos = (rtBar.rect.width) / 200;
+        fDecPos = fIncPos * -1;
+        rtBar.localPosition = new Vector3(rtBar.localPosition.x + 100 * fDecPos, rtBar.localPosition.y, rtBar.localPosition.z);
     }
 
     // Update is called once per frame
