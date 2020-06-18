@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = -transform.forward * speed;
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetMouseButtonDown(0))
         {
             playeranim.SetTrigger("Attack");
         }

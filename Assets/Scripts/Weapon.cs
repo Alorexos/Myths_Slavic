@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : Item
 {
-    public string WeaponType;
-    public int BaseMinDamage;
-    public int BaseMaxdamage;
+    enum WeaponTypes {Sword,Axe,Mace,Spear,Bow};
+
+    [SerializeField]
+    private WeaponTypes WeaponType;
+    [SerializeField]
+    private int BaseMinDamage;
+    [SerializeField]
+    private int BaseMaxdamage;
 
     private Monster p_sMonster;
     private PlayerStats p_sPlayerStats;
@@ -27,8 +32,8 @@ public class Weapon : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Monster") return;
-
-        p_sMonster = other.GetComponent<Monster>();
+        gameObject.GetComponent<BoxCollider>().isTrigger = false;
+        p_sMonster = other.GetComponentInParent<Monster>();
         p_sMonster.fntDamage(Random.Range(BaseMinDamage,BaseMaxdamage));
         if (ExDmgType != "")
         {

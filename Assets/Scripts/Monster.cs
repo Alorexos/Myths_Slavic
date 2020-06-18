@@ -18,13 +18,6 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //fDefense = 20.0f;
-        //fLightningResistance = 0.0f;
-        //fFireResistance = 50.0f;
-        //fWindResistance = 0.0f;
-        //fNecroticResistance = 0.0f;
-        //fLightResistance = 0.0f;
-        //fShadowResistance = 0.0f;
     }
 
     // Update is called once per frame

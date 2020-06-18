@@ -6,7 +6,6 @@ public class Shrine : MonoBehaviour
 {
     public string Type;
     private PlayerStats p_sPlayerStats;
-    private Weapon p_sWeapon;
     // Start is called before the first frame update
     void Start()
     {
