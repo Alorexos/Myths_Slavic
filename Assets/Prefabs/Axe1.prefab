@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8582308192227571158
+--- !u!1 &1245630916084523706
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8582308192227571159}
-  - component: {fileID: 8582308192227571155}
-  - component: {fileID: 8582308192227571154}
-  - component: {fileID: 8582308192227571153}
-  - component: {fileID: 8582308192227571152}
+  - component: {fileID: 2815320890884001961}
+  - component: {fileID: 6505733129765890719}
+  - component: {fileID: 681601256562906726}
+  - component: {fileID: 6359419285297977731}
+  - component: {fileID: 2164953091850475287}
   m_Layer: 0
-  m_Name: Sword
-  m_TagString: Weapon
+  m_Name: Axe1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8582308192227571159
+--- !u!4 &2815320890884001961
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582308192227571158}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0075664, y: 0.00064842147, z: 0.0011603}
+  m_GameObject: {fileID: 1245630916084523706}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8582308192227571155
+--- !u!33 &6505733129765890719
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582308192227571158}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8582308192227571154
+  m_GameObject: {fileID: 1245630916084523706}
+  m_Mesh: {fileID: -5495902117074765545, guid: 0eea2993b331ed9459e3a47f8e97c90e, type: 3}
+--- !u!23 &681601256562906726
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582308192227571158}
+  m_GameObject: {fileID: 1245630916084523706}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -876546973899608171, guid: 0eea2993b331ed9459e3a47f8e97c90e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,31 +81,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8582308192227571153
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582308192227571158}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8582308192227571152
+--- !u!114 &6359419285297977731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582308192227571158}
+  m_GameObject: {fileID: 1245630916084523706}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02fea3362362da847974d69bcfa3813b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponType: 0
-  BaseMinDamage: 10
-  BaseMaxdamage: 13
+  WeaponType: 1
+  BaseMinDamage: 11
+  BaseMaxdamage: 12
+--- !u!65 &2164953091850475287
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245630916084523706}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0023108944, y: 0.00029948476, z: 0.0018404337}
+  m_Center: {x: 0.0048789848, y: 0.0000000013387762, z: -0.000731338}

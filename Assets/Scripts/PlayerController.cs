@@ -6,7 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     Animator playeranim;
-    public float speed = 10.0f; 
+    public float speed = 10.0f;
+
+    // Weapon
+    [SerializeField]
+    private GameObject RightHandItem;
+    [SerializeField]
+    private GameObject WeaponPrefab;
+
+    private GameObject Weapon;
 
     // Start is called before the first frame update
     void Start()
@@ -183,9 +191,19 @@ public class PlayerController : MonoBehaviour
             rb.velocity = -transform.forward * speed;
         }
 
+        // Equip Weapon *** TEMPORARY ***
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Weapon = Instantiate(WeaponPrefab, RightHandItem.transform) as GameObject;
+            Weapon.transform.localPosition = new Vector3(0, 0, 0);
+            Weapon.transform.localRotation = Quaternion.identity;
+        }
+
+
         if (Input.GetMouseButtonDown(0))
         {
             playeranim.SetTrigger("Attack");
+            Weapon.GetComponent<Collider>().isTrigger = true;
         }
     }
 }

@@ -5,7 +5,10 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     enum QualityTypes {Common,Uncommon,Rare,Epic,Set,Legendary};
+    enum ItemTypes {Weapon,Armour,Food};
 
+    [SerializeField]
+    private ItemTypes ItemType;
     [SerializeField]
     private string ItemName;
     [SerializeField]
