@@ -13,7 +13,7 @@ public class Favour : MonoBehaviour
     void Start()
     {
         rtBar = GetComponent<RectTransform>();
-        Debug.Log(rtBar.rect.width);
+        //Debug.Log(rtBar.rect.width);
         fIncPos = (rtBar.rect.width) / 200;
         fDecPos = fIncPos * -1;
         rtBar.localPosition = new Vector3(rtBar.localPosition.x + 100 * fDecPos, rtBar.localPosition.y, rtBar.localPosition.z);
