@@ -1,14 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 
 public class Weapon : MonoBehaviour
 {
-    enum WeaponTypes {Sword,Axe,Mace,Spear,Bow};
-
     [SerializeField]
-    private WeaponTypes WeaponType;
+    private string WeaponType;
     [SerializeField]
     private int BaseMinDamage;
     [SerializeField]
@@ -19,8 +16,7 @@ public class Weapon : MonoBehaviour
     private string ExDmgType;
 
 
-    private List<string> stringList;
-    private string[] parsedList;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,39 +43,11 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void Initialise(int ID)
+    public void SetupWeapon(string Type, int Min, int Max)
     {
-        stringList = new List<string>();
-        readTextFile(ID);
-        GetComponent<MeshFilter>().mesh = (Mesh)Resources.Load(parsedList[4], typeof(Mesh));
-        BaseMinDamage = int.Parse(parsedList[2]);
-        BaseMaxDamage = int.Parse(parsedList[3]);
+        WeaponType = Type;
+        BaseMinDamage = Min;
+        BaseMaxDamage = Max;
     }
 
-    void readTextFile(int ID)
-    {
-        StreamReader inp_stm = new StreamReader("Assets/Data/Axe.csv");
-
-        while(!inp_stm.EndOfStream)
-        {
-            string inp_ln = inp_stm.ReadLine();
-            stringList.Add(inp_ln);
-        }
-
-        inp_stm.Close();
-
-        parseList(ID);
-    }
-
-    void parseList(int ID)
-    {
-        for(int i = 0; i < stringList.Count; i++)
-        {
-            parsedList = stringList[i].Split(',');
-
-            if(int.Parse(parsedList[0]) == ID)
-                break;
-        }
-
-    }
 }
