@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
+//using System.IO;
 
 public class WeaponEquip : MonoBehaviour
 {
@@ -10,42 +10,49 @@ public class WeaponEquip : MonoBehaviour
     private GameObject RightHandItem;
     private GameObject Weapon;
 
-    private List<string> stringList;
-    private string[] parsedList;
+    //private List<string> stringList;
+    //private string[] parsedList;
 
     // Start is called before the first frame update
     void Start()
     {
-        stringList = new List<string>();
+        //stringList = new List<string>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (Weapon != null)
-            {
-                Unequip();
-            }
-            else
-            {
-                readTextFile(2);
-                Weapon = Instantiate(Resources.Load(parsedList[4]), RightHandItem.transform) as GameObject;
-                Weapon.GetComponent<Weapon>().SetupWeapon("Axe", int.Parse(parsedList[2]), int.Parse(parsedList[3]));
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    if (Weapon != null)
+        //    {
+        //        Unequip();
+        //    }
+        //    else
+        //    {
+        //        Equip(1);
+        //    }
+        //}
 
 
     }
-    void Equip(int ID)
+    //void Equip(int ID)
+    //{
+    //    if (Weapon != null)
+    //        Unequip(); 
+
+    //    readTextFile(ID);
+    //    Weapon = Instantiate(Resources.Load(parsedList[4]), RightHandItem.transform) as GameObject;
+    //    Weapon.GetComponent<Weapon>().SetupWeapon(int.Parse(parsedList[0]), parsedList[1], int.Parse(parsedList[2]), int.Parse(parsedList[3]));
+    //}
+
+
+    void Equip(Weapon WeaponObject)
     {
         if (Weapon != null)
-            Unequip(); 
+            Unequip();
 
-        readTextFile(ID);
-        Weapon = Instantiate(Resources.Load(parsedList[4]), RightHandItem.transform) as GameObject;
-        Weapon.GetComponent<Weapon>().SetupWeapon("Axe", int.Parse(parsedList[2]), int.Parse(parsedList[3]));
+        //Weapon = Instantiate(Resources.Load(WeaponObject.GetPrefabDir()),RightHandItem.transform) as GameObject;
     }
 
     void Unequip()
@@ -53,30 +60,30 @@ public class WeaponEquip : MonoBehaviour
         Destroy(Weapon);
     }
     
-    void readTextFile(int ID)
-    {
-        StreamReader inp_stm = new StreamReader("Assets/Data/Weapons.csv");
+    //void readTextFile(int ID)
+    //{
+    //    StreamReader inp_stm = new StreamReader("Assets/Data/Weapons.csv");
 
-        while (!inp_stm.EndOfStream)
-        {
-            string inp_ln = inp_stm.ReadLine();
-            stringList.Add(inp_ln);
-        }
+    //    while (!inp_stm.EndOfStream)
+    //    {
+    //        string inp_ln = inp_stm.ReadLine();
+    //        stringList.Add(inp_ln);
+    //    }
 
-        inp_stm.Close();
+    //    inp_stm.Close();
 
-        parseList(ID);
-    }
+    //    parseList(ID);
+    //}
 
-    void parseList(int ID)
-    {
-        for (int i = 0; i < stringList.Count; i++)
-        {
-            parsedList = stringList[i].Split(',');
+    //void parseList(int ID)
+    //{
+    //    for (int i = 0; i < stringList.Count; i++)
+    //    {
+    //        parsedList = stringList[i].Split(',');
 
-            if (int.Parse(parsedList[0]) == ID)
-                break;
-        }
+    //        if (int.Parse(parsedList[0]) == ID)
+    //            break;
+    //    }
 
-    }
+    //}
 }
