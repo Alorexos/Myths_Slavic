@@ -11,7 +11,7 @@ public class Weapon : Item
     public Weapon(string[] Data)
     {
         ID = int.Parse(Data[0]);
-        Count = 1;
+        Type = "Weapon";
         Name = Data[1];
         Description = Data[2];
         ItemQuality = Data[3];

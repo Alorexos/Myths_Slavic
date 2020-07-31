@@ -36,24 +36,23 @@ public class WeaponEquip : MonoBehaviour
 
 
     }
-    //void Equip(int ID)
-    //{
-    //    if (Weapon != null)
-    //        Unequip(); 
-
-    //    readTextFile(ID);
-    //    Weapon = Instantiate(Resources.Load(parsedList[4]), RightHandItem.transform) as GameObject;
-    //    Weapon.GetComponent<Weapon>().SetupWeapon(int.Parse(parsedList[0]), parsedList[1], int.Parse(parsedList[2]), int.Parse(parsedList[3]));
-    //}
-
-
-    void Equip(Weapon WeaponObject)
+    public void Equip(int id)
     {
         if (Weapon != null)
             Unequip();
-
-        //Weapon = Instantiate(Resources.Load(WeaponObject.GetPrefabDir()),RightHandItem.transform) as GameObject;
+        Debug.Log("Equiping");
+       // Weapon = Instantiate(Resources.Load(parsedList[4]), RightHandItem.transform) as GameObject;
+       // Weapon.GetComponent<Weapon>().SetupWeapon(int.Parse(parsedList[0]), parsedList[1], int.Parse(parsedList[2]), int.Parse(parsedList[3]));
     }
+
+
+    //void Equip(Weapon WeaponObject)
+    //{
+    //    if (Weapon != null)
+    //        Unequip();
+
+    //    //Weapon = Instantiate(Resources.Load(WeaponObject.GetPrefabDir()),RightHandItem.transform) as GameObject;
+    //}
 
     void Unequip()
     {

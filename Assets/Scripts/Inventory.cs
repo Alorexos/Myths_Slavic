@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,47 +13,44 @@ public class Inventory : MonoBehaviour
 
     private int PosX = 0;
     private int PosY = 0;
-    private GameObject ItemSlot;
 
     private int TempID;
 
     // Inventory Lists
-    private Dictionary<int, Weapon>        WeaponInv  = new Dictionary<int, Weapon>();
-    private Dictionary<int, Armour>        ArmourInv  = new Dictionary<int, Armour>();
-    private Dictionary<int, Consumable>    ConsumInv  = new Dictionary<int, Consumable>();
-    private Dictionary<int, Ingredient>    IngredInv  = new Dictionary<int, Ingredient>();
-    private Dictionary<int, QuestItem>     QuestInv   = new Dictionary<int, QuestItem>();
-    private Dictionary<int, Miscellaneous> MiscInv    = new Dictionary<int, Miscellaneous>();
+    private Dictionary<int, int> WeaponInv  = new Dictionary<int, int>();
+    private Dictionary<int, int> ArmourInv  = new Dictionary<int, int>();
+    private Dictionary<int, int> ConsumInv  = new Dictionary<int, int>();
+    private Dictionary<int, int> IngredInv  = new Dictionary<int, int>();
+    private Dictionary<int, int> QuestInv   = new Dictionary<int, int>();
+    private Dictionary<int, int> MiscInv    = new Dictionary<int, int>();
 
     // Start is called before the first frame update
     void Start()
     {
 
         // TESTING CODE - This will be reading from save file if anything
-        for (int i = 0; i < 50 ; i++)
+        for (int i = 0; i < 50; i++)
         {
             TempID = Random.Range(1, 10);
-
             if (WeaponInv.ContainsKey(TempID))
             {
-                WeaponInv[TempID].Count++;
+                WeaponInv[TempID]++;
             }
             else
             {
-                WeaponInv.Add(TempID, ItemDatabase.Instance.GetWeaponItem(TempID));
+                WeaponInv.Add(TempID, 1);
             }
         }
         for (int i = 0; i < 100; i++)
         {
-            TempID = Random.Range(1, 12);
-
+            TempID = Random.Range(1, 11);
             if (ArmourInv.ContainsKey(TempID))
             {
-                ArmourInv[TempID].Count++;
+                ArmourInv[TempID]++;
             }
             else
             {
-                ArmourInv.Add(TempID, ItemDatabase.Instance.GetArmourItem(TempID));
+                ArmourInv.Add(TempID, 1);
             }
         }
         // TESTING CODE
@@ -69,128 +67,61 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void CreateInventorySlotsinWindow(string ItemType)
+    public void CreateInventorySlotsinWindow(string itemType)
     {
         for (int i = 0; i < Content.transform.childCount; i++)
         {
-            Destroy(Content.transform.GetChild(i).gameObject);
+            GameObject.Destroy(Content.transform.GetChild(i).gameObject);
         }
-        switch(ItemType)
+
+        switch (itemType)
         {
             case "Weapon":
-                CreateSlotForWeapon();
+                CreateSlots(WeaponInv, itemType);
                 break;
             case "Armour":
-                CreateSlotForArmour();
+                CreateSlots(ArmourInv, itemType);
                 break;
             case "Consumables":
-                CreateSlotForConsum();
+            //    CreateSlotForConsum();
                 break;
             case "Ingredients":
-                CreateSlotForIngred();
+             //   CreateSlotForIngred();
                 break;
             case "Quest":
-                CreateSlotForQuest();
+           //     CreateSlotForQuest();
                 break;
             case "Miscellaneous":
-                CreateSlotForMisc();
+             //   CreateSlotForMisc();
                 break;
         }
     }
-    private void CreateSlot(int i)
+    private void CreateSlots(Dictionary<int, int> inventory, string itemType)
     {
-        ItemSlot = Instantiate(ItemSlotPrefab);
-        ItemSlot.name = i.ToString();
-        ItemSlot.GetComponent<Toggle>().group = ItemSlotToggleGroup;
-        ItemSlot.transform.SetParent(Content.transform, false);
-        ItemSlot.GetComponent<RectTransform>().localPosition = new Vector3(PosX, PosY, 0.0f);
-        PosY -= (int)ItemSlot.GetComponent<RectTransform>().rect.height;
-    }
-    private void CreateSlotForWeapon()
-    {
-        for (int i = 1; i < WeaponInv.Count; i++)
+        GameObject ItemSlot;
+        int ItemID; 
+
+        for (int i = 0; i < inventory.Count; i++)
         {
-            CreateSlot(i);
-            ItemSlot.transform.GetChild(0).GetComponent<Text>().text = WeaponInv[i].Name;
-            ItemSlot.transform.GetChild(1).GetComponent<Text>().text = WeaponInv[i].Count.ToString();
+            ItemID = inventory.Keys.ElementAt(i);
+            ItemSlot = Instantiate(ItemSlotPrefab);
+            ItemSlot.name = "InvItem_" + i;
+            //ItemSlot.GetComponent<Toggle>().group = ItemSlotToggleGroup;
+            ItemSlot.transform.SetParent(Content.transform, false);
+            ItemSlot.GetComponent<RectTransform>().localPosition = new Vector3(PosX, PosY, 0.0f);
+            PosY -= (int)ItemSlot.GetComponent<RectTransform>().rect.height;
+            ItemSlot.GetComponent<InvSlot>().AddItem(itemType, ItemID, inventory[ItemID]);
         }
     }
 
-    private void CreateSlotForArmour()
+    public void AddItem(string itemType, int id)
     {
-        for (int i = 1; i < ArmourInv.Count; i++)
-        {
-            CreateSlot(i);
-            ItemSlot.transform.GetChild(0).GetComponent<Text>().text = ArmourInv[i].Name;
-            ItemSlot.transform.GetChild(1).GetComponent<Text>().text = ArmourInv[i].Count.ToString();
-        }
+       // ItemDatabase.Instance.GetWeaponItem(id).Count++;
     }
 
-    private void CreateSlotForConsum()
+    public void RemoveItem(string itemType, int id)
     {
-        for (int i = 1; i < ConsumInv.Count; i++)
-        {
-            CreateSlot(i);
-            ItemSlot.transform.GetChild(0).GetComponent<Text>().text = ConsumInv[i].Name;
-            ItemSlot.transform.GetChild(1).GetComponent<Text>().text = ConsumInv[i].Count.ToString();
-        }
-    }
-
-    private void CreateSlotForIngred()
-    {
-        for (int i = 1; i < IngredInv.Count; i++)
-        {
-            CreateSlot(i);
-            ItemSlot.transform.GetChild(0).GetComponent<Text>().text = IngredInv[i].Name;
-            ItemSlot.transform.GetChild(1).GetComponent<Text>().text = IngredInv[i].Count.ToString();
-        }
-    }
-
-    private void CreateSlotForQuest()
-    {
-        for (int i = 1; i < QuestInv.Count; i++)
-        {
-            CreateSlot(i);
-            ItemSlot.transform.GetChild(0).GetComponent<Text>().text = QuestInv[i].Name;
-            ItemSlot.transform.GetChild(1).GetComponent<Text>().text = QuestInv[i].Count.ToString();
-        }
-    }
-
-    private void CreateSlotForMisc()
-    {
-        for (int i = 1; i < MiscInv.Count; i++)
-        {
-            CreateSlot(i);
-            ItemSlot.transform.GetChild(0).GetComponent<Text>().text = MiscInv[i].Name;
-            ItemSlot.transform.GetChild(1).GetComponent<Text>().text = MiscInv[i].Count.ToString();
-        }
-    }
-
-    public void AddItem(Weapon Item)
-    {
-        if (WeaponInv.ContainsKey(Item.ID))
-        {
-            WeaponInv[Item.ID].Count++;
-        }
-        else
-        {
-            WeaponInv.Add(Item.ID, Item);
-        }
-    }
-
-    public void RemoveItem(Weapon Item)
-    {
-        if (WeaponInv.ContainsKey(Item.ID))
-        {
-            if (WeaponInv[Item.ID].Count > 1)
-            {
-                WeaponInv[Item.ID].Count--;
-            }
-            else
-            {
-                WeaponInv.Remove(Item.ID);
-            }
-        }
+      //  ItemDatabase.Instance.GetWeaponItem(id).Count--;
     }
 
     private void ViewInventory()
@@ -206,5 +137,4 @@ public class Inventory : MonoBehaviour
             InvCanvas.enabled = true;
         }
     }
-
 }

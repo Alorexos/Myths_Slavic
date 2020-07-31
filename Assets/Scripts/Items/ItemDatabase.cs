@@ -68,7 +68,6 @@ public class ItemDatabase: MonoBehaviour
         ParseList(Type);
 
         ItemList.Clear();
-        Debug.Log(ItemList.Count);
     }
 
     protected void ParseList(string Type)

@@ -11,7 +11,6 @@ public class Miscellaneous : Item
     public Miscellaneous(string[] Data)
     {
         ID = int.Parse(Data[0]);
-        Count = 1;
         Name = Data[1];
         Description = Data[2];
         ItemQuality = Data[3];
