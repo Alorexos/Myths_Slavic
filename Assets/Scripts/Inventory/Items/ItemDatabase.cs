@@ -11,6 +11,7 @@ public class ItemDatabase: MonoBehaviour
     // Item Databases
     private List<Weapon> Weapons = new List<Weapon>();
     private List<Armour> Armours = new List<Armour>();
+    private List<Consumable> Consumables = new List<Consumable>();
 
     // Item data lookup variables
     private List<string> ItemList = new List<string>();
@@ -42,8 +43,9 @@ public class ItemDatabase: MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        ReadTextFile("Weapon");
-        ReadTextFile("Armour");
+        ReadTextFile("Weapons");
+        ReadTextFile("Armours");
+        ReadTextFile("Consumables");
 
     }
     // Start is called before the first frame update
@@ -60,7 +62,8 @@ public class ItemDatabase: MonoBehaviour
         while (!inp_stm.EndOfStream)
         {
             string inp_ln = inp_stm.ReadLine();
-            ItemList.Add(inp_ln);
+            if(!inp_ln.Contains("ID"))
+                ItemList.Add(inp_ln);
         }
 
         inp_stm.Close();
@@ -77,11 +80,14 @@ public class ItemDatabase: MonoBehaviour
             ItemData = ItemList[i].Split(',');
             switch(Type)
             {
-                case "Weapon":
+                case "Weapons":
                     Weapons.Add(new Weapon(ItemData));
                     break;
-                case "Armour":
+                case "Armours":
                     Armours.Add(new Armour(ItemData));
+                    break;
+                case "Consumables":
+                    Consumables.Add(new Consumable(ItemData));
                     break;
             }
         }
@@ -95,5 +101,10 @@ public class ItemDatabase: MonoBehaviour
     public Armour GetArmourItem(int ID)
     {
         return Armours.Find(item => item.ID == ID);
+    }
+
+    public Consumable GetConsumableItem(int ID)
+    {
+        return Consumables.Find(item => item.ID == ID);
     }
 }

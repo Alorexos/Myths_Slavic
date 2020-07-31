@@ -1,0 +1,25 @@
+ID,Item Name,Item Type,Quality,Description,Defence,
+1,Leather Hat,Head,Common,,11,Prefabs/Axe1
+2,Leather Chest,Chest,Common,,9,Prefabs/Sword
+3,Leather Gloves,Gloves,Common,,11,Prefabs/Axe1
+4,Leather Pants,Legs,Common,,21,Prefabs/Axe1
+5,Leather Shoes,Feet,Common,,19,Prefabs/Axe1
+6,Leather Shoulders,Shoulders,Common,,21,Prefabs/Axe1
+7,Mail Hat,Head,Rare,,31,Prefabs/Axe1
+8,Mail Chest,Chest,Rare,,29,Prefabs/Axe1
+9,Mail Gloves,Gloves,Rare,,31,Prefabs/Axe1
+10,Mail Pants,Legs,Rare,,50,Prefabs/Axe1
+11,Mail Shoes,Feet,Rare,,50,Prefabs/Axe2
+12,Mail Shoulders,Shoulders,Rare,,50,Prefabs/Axe3
+13,Plate Hat,Head,Epic,,31,Prefabs/Axe1
+14,Plate Chest,Chest,Epic,,29,Prefabs/Axe1
+15,Plate Gloves,Gloves,Epic,,31,Prefabs/Axe1
+16,Plate Pants,Legs,Epic,,50,Prefabs/Axe1
+17,Plate Shoes,Feet,Epic,,50,Prefabs/Axe2
+18,Plate Shoulders,Shoulders,Epic,,50,Prefabs/Axe3
+19,Mithril Hat,Head,Legendary,,31,Prefabs/Axe1
+20,Mithril Chest,Chest,Legendary,,29,Prefabs/Axe1
+21,Mithril Gloves,Gloves,Legendary,,31,Prefabs/Axe1
+22,Mithril Pants,Legs,Legendary,,50,Prefabs/Axe1
+23,Mithril Shoes,Feet,Legendary,,50,Prefabs/Axe2
+24,Mithril Shoulders,Shoulders,Legendary,,50,Prefabs/Axe3

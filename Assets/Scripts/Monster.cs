@@ -5,7 +5,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     public float fHealth;
-    public float fDefense;
+    public float Armour;
     public float fLightningResistance;
     public float fFireResistance;
     public float fWindResistance;
@@ -30,7 +30,7 @@ public class Monster : MonoBehaviour
     }
     public void fntDamage(float fDamage)
     {
-        fFinalDamage = fDamage * ((100 - fDefense) / 100);
+        fFinalDamage = fDamage * ((100 - Armour) / 100);
         fHealth -= fFinalDamage;
         Debug.Log("Physical: " + fFinalDamage + " (Resisted: " + (fDamage - fFinalDamage) + ")");
     }

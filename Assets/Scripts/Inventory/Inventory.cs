@@ -4,6 +4,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ItemsType 
+{
+    Weapon,
+    Armour,
+    Consumable,
+    Ingredient,
+    Quest,
+    Miscellaneous
+};
 
 public class Inventory : MonoBehaviour
 {
@@ -17,21 +26,20 @@ public class Inventory : MonoBehaviour
     private int TempID;
 
     // Inventory Lists
-    private Dictionary<int, int> WeaponInv  = new Dictionary<int, int>();
-    private Dictionary<int, int> ArmourInv  = new Dictionary<int, int>();
-    private Dictionary<int, int> ConsumInv  = new Dictionary<int, int>();
-    private Dictionary<int, int> IngredInv  = new Dictionary<int, int>();
-    private Dictionary<int, int> QuestInv   = new Dictionary<int, int>();
-    private Dictionary<int, int> MiscInv    = new Dictionary<int, int>();
+    private Dictionary<int, int> WeaponInv        = new Dictionary<int, int>();
+    private Dictionary<int, int> ArmourInv        = new Dictionary<int, int>();
+    private Dictionary<int, int> ConsumableInv    = new Dictionary<int, int>();
+    private Dictionary<int, int> IngredientInv    = new Dictionary<int, int>();
+    private Dictionary<int, int> QuestInv         = new Dictionary<int, int>();
+    private Dictionary<int, int> MiscellaneousInv = new Dictionary<int, int>();
 
     // Start is called before the first frame update
     void Start()
     {
-
         // TESTING CODE - This will be reading from save file if anything
         for (int i = 0; i < 50; i++)
         {
-            TempID = Random.Range(1, 10);
+            TempID = Random.Range(1, 11);
             if (WeaponInv.ContainsKey(TempID))
             {
                 WeaponInv[TempID]++;
@@ -43,7 +51,7 @@ public class Inventory : MonoBehaviour
         }
         for (int i = 0; i < 100; i++)
         {
-            TempID = Random.Range(1, 11);
+            TempID = Random.Range(1, 25);
             if (ArmourInv.ContainsKey(TempID))
             {
                 ArmourInv[TempID]++;
@@ -53,9 +61,21 @@ public class Inventory : MonoBehaviour
                 ArmourInv.Add(TempID, 1);
             }
         }
+        for (int i = 0; i < 100; i++)
+        {
+            TempID = Random.Range(1, 3);
+            if (ConsumableInv.ContainsKey(TempID))
+            {
+                ConsumableInv[TempID]++;
+            }
+            else
+            {
+                ConsumableInv.Add(TempID, 1);
+            }
+        }
         // TESTING CODE
 
-        CreateInventorySlotsinWindow("Weapon");
+        CreateInventorySlotsinWindow("Weapons");
     }
 
     // Update is called once per frame
@@ -67,36 +87,38 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void CreateInventorySlotsinWindow(string itemType)
+    public void CreateInventorySlotsinWindow(string itemsType)
     {
+        ItemsType ItemsType = (ItemsType)System.Enum.Parse(typeof(ItemsType), itemsType);
+
         for (int i = 0; i < Content.transform.childCount; i++)
         {
             GameObject.Destroy(Content.transform.GetChild(i).gameObject);
         }
 
-        switch (itemType)
+        switch (ItemsType)
         {
-            case "Weapon":
-                CreateSlots(WeaponInv, itemType);
+            case ItemsType.Weapon:
+                CreateSlots(WeaponInv, ItemsType);
                 break;
-            case "Armour":
-                CreateSlots(ArmourInv, itemType);
+            case ItemsType.Armour:
+                CreateSlots(ArmourInv, ItemsType);
                 break;
-            case "Consumables":
-            //    CreateSlotForConsum();
+            case ItemsType.Consumable:
+                CreateSlots(ConsumableInv, ItemsType);
                 break;
-            case "Ingredients":
+            case ItemsType.Ingredient:
              //   CreateSlotForIngred();
                 break;
-            case "Quest":
+            case ItemsType.Quest:
            //     CreateSlotForQuest();
                 break;
-            case "Miscellaneous":
+            case ItemsType.Miscellaneous:
              //   CreateSlotForMisc();
                 break;
         }
     }
-    private void CreateSlots(Dictionary<int, int> inventory, string itemType)
+    private void CreateSlots(Dictionary<int, int> inventory, ItemsType itemsType)
     {
         GameObject ItemSlot;
         int ItemID; 
@@ -110,7 +132,7 @@ public class Inventory : MonoBehaviour
             ItemSlot.transform.SetParent(Content.transform, false);
             ItemSlot.GetComponent<RectTransform>().localPosition = new Vector3(PosX, PosY, 0.0f);
             PosY -= (int)ItemSlot.GetComponent<RectTransform>().rect.height;
-            ItemSlot.GetComponent<InvSlot>().AddItem(itemType, ItemID, inventory[ItemID]);
+            ItemSlot.GetComponent<InventorySlot>().AddItem(itemsType, ItemID, inventory[ItemID]);
         }
     }
 
@@ -135,6 +157,20 @@ public class Inventory : MonoBehaviour
         else
         {
             InvCanvas.enabled = true;
+        }
+    }
+
+    private ItemsType ParseEnum(string value)
+    {
+        try
+        {
+            return (ItemsType)System.Enum.Parse(typeof(ItemsType),value);
+            //Foo(enumerable); //Now you have your enum, do whatever you want.
+        }
+        catch (System.Exception)
+        {
+            Debug.LogErrorFormat("Parse: Can't convert {0} to enum, please check the spell.", value);
+            return ItemsType.Weapon;
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿ID,Name,Type,Quality,Description,Min Dmg,Min Dmg,Prefab Dir
+1,Basic Axe,Axe,Common,,11,12,Prefabs/Axe1
+2,Basic Sword,Sword,Common,,9,13,Prefabs/Sword
+3,Basic Mace,Mace,Common,,11,11,Prefabs/Axe1
+4,Rare Axe,Axe,Rare,,21,22,Prefabs/Axe1
+5,Rare Sword,Sword,Rare,,19,23,Prefabs/Axe1
+6,Rare Mace,Mace,Rare,,21,21,Prefabs/Axe1
+7,Epic Axe,Axe,Epic,,31,32,Prefabs/Axe1
+8,Epic Sword,Sword,Epic,,29,33,Prefabs/Axe1
+9,Epic Mace,Mace,Epic,,31,31,Prefabs/Axe1
+10,Legendary Axe,Axe,Legendary,,50,51,Prefabs/Axe1

@@ -772,7 +772,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.7864e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 6.681e-42, z: 0, w: -0.0000000037107384}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1177,7 +1177,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Weapon
+          m_StringArgument: Weapons
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &315262540
@@ -1309,7 +1309,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Armour
+          m_StringArgument: Armours
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &350572767
@@ -3555,7 +3555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fHealth: 100
-  fDefense: 20
+  Armour: 0
   fLightningResistance: 0
   fFireResistance: 0
   fWindResistance: 0
@@ -6244,7 +6244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01c861bf99fb3849857e5532ae6d1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RightHandItem: {fileID: 1729756181}
 --- !u!4 &8572989239812953539
 Transform:
   m_ObjectHideFlags: 0
