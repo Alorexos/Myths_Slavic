@@ -19,11 +19,4 @@ public class Armour : Item
         Defence = int.Parse(data[5]);
         PrefabDir = data[6];
     }
-
-    public static Armour CreateInstance(string[] data)
-    {
-        Armour instance = ScriptableObject.CreateInstance<Armour>();
-        instance.Initialise(data);
-        return instance;
-    }
 }

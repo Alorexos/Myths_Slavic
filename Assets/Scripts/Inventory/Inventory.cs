@@ -18,6 +18,7 @@ public enum ItemsType
 
 public class Inventory : MonoBehaviour
 {
+
     public GameObject ItemSlotPrefab;
     public GameObject Content;
 
@@ -27,12 +28,12 @@ public class Inventory : MonoBehaviour
     private int TempID;
 
     // Inventory Lists
-    private Dictionary<int, int> WeaponInv        = new Dictionary<int, int>();
-    private Dictionary<int, int> ArmourInv        = new Dictionary<int, int>();
-    private Dictionary<int, int> ConsumableInv    = new Dictionary<int, int>();
-    private Dictionary<int, int> IngredientInv    = new Dictionary<int, int>();
-    private Dictionary<int, int> QuestInv         = new Dictionary<int, int>();
-    private Dictionary<int, int> MiscellaneousInv = new Dictionary<int, int>();
+    private Dictionary<int, Item> WeaponInv        = new Dictionary<int, Item>();
+    private Dictionary<int, Item> ArmourInv        = new Dictionary<int, Item>();
+    private Dictionary<int, Item> ConsumableInv    = new Dictionary<int, Item>();
+    private Dictionary<int, Item> IngredientInv    = new Dictionary<int, Item>();
+    private Dictionary<int, Item> QuestInv         = new Dictionary<int, Item>();
+    private Dictionary<int, Item> MiscellaneousInv = new Dictionary<int, Item>();
 
     // Start is called before the first frame update
     void Start()
@@ -43,11 +44,13 @@ public class Inventory : MonoBehaviour
             TempID = Random.Range(1, 11);
             if (WeaponInv.ContainsKey(TempID))
             {
-                WeaponInv[TempID]++;
+                WeaponInv[TempID].Stack++;
             }
             else
-            {
-                WeaponInv.Add(TempID, 1);
+             {
+                Weapon temp = ScriptableObject.CreateInstance<Weapon>();
+                temp.Initialise(ItemDatabase.Instance.GetItem(TempID, ItemsType.Weapon));
+                WeaponInv.Add(temp.ID, temp);
             }
         }
         for (int i = 0; i < 100; i++)
@@ -55,11 +58,13 @@ public class Inventory : MonoBehaviour
             TempID = Random.Range(1, 25);
             if (ArmourInv.ContainsKey(TempID))
             {
-                ArmourInv[TempID]++;
+                ArmourInv[TempID].Stack++;
             }
             else
             {
-                ArmourInv.Add(TempID, 1);
+                Armour temp = ScriptableObject.CreateInstance<Armour>();
+                temp.Initialise(ItemDatabase.Instance.GetItem(TempID, ItemsType.Armour));
+                ArmourInv.Add(temp.ID, temp);
             }
         }
         for (int i = 0; i < 100; i++)
@@ -67,11 +72,13 @@ public class Inventory : MonoBehaviour
             TempID = Random.Range(1, 3);
             if (ConsumableInv.ContainsKey(TempID))
             {
-                ConsumableInv[TempID]++;
+                ConsumableInv[TempID].Stack++;
             }
             else
             {
-                ConsumableInv.Add(TempID, 1);
+                Consumable temp = ScriptableObject.CreateInstance<Consumable>();
+                temp.Initialise(ItemDatabase.Instance.GetItem(TempID, ItemsType.Consumable));
+                ConsumableInv.Add(temp.ID, temp);
             }
         }
         // TESTING CODE
@@ -102,37 +109,34 @@ public class Inventory : MonoBehaviour
                 CreateSlots(WeaponInv, itemsType);
                 break;
             case ItemsType.Armour:
-
-                CreateSlots(ArmourInv, itemsType);
+                 CreateSlots(ArmourInv, itemsType);
                 break;
             case ItemsType.Consumable:
                 CreateSlots(ConsumableInv, itemsType);
                 break;
             case ItemsType.Ingredient:
-             //   CreateSlotForIngred();
+                CreateSlots(IngredientInv, itemsType);
                 break;
             case ItemsType.Quest:
-           //     CreateSlotForQuest();
+                CreateSlots(QuestInv, itemsType);
                 break;
             case ItemsType.Miscellaneous:
-             //   CreateSlotForMisc();
+                CreateSlots(MiscellaneousInv, itemsType);
                 break;
         }
     }
-    private void CreateSlots(Dictionary<int, int> inventory, ItemsType itemsType)
+    private void CreateSlots(Dictionary<int, Item> inventory, ItemsType itemsType)
     {
         GameObject ItemSlot;
-        int ItemID; 
 
         for (int i = 0; i < inventory.Count; i++)
         {
-            ItemID = inventory.Keys.ElementAt(i);
             ItemSlot = Instantiate(ItemSlotPrefab);
             ItemSlot.name = "InvItem_" + i;
             ItemSlot.transform.SetParent(Content.transform, false);
             ItemSlot.GetComponent<RectTransform>().localPosition = new Vector3(PosX, PosY, 0.0f);
             PosY -= (int)ItemSlot.GetComponent<RectTransform>().rect.height;
-            ItemSlot.GetComponent<InventorySlot>().AddItem(itemsType, ItemID, inventory[ItemID]);
+            ItemSlot.GetComponent<InventorySlot>().AddItem(inventory.Values.ElementAt(i), itemsType);
         }
     }
 
@@ -141,22 +145,22 @@ public class Inventory : MonoBehaviour
         switch (itemType)
         {
             case ItemsType.Weapon:
-                WeaponInv[id]++;
+                WeaponInv[id].Stack++;
                 break;
             case ItemsType.Armour:
-                ArmourInv[id]++;
+                ArmourInv[id].Stack++;
                 break;
             case ItemsType.Consumable:
-                ConsumableInv[id]++;
+                ConsumableInv[id].Stack++;
                 break;
             case ItemsType.Ingredient:
-                IngredientInv[id]++;
+                IngredientInv[id].Stack++;
                 break;
             case ItemsType.Quest:
-                QuestInv[id]++;
+                QuestInv[id].Stack++;
                 break;
             case ItemsType.Miscellaneous:
-                MiscellaneousInv[id]++;
+                MiscellaneousInv[id].Stack++;
                 break;
         }
     }
@@ -166,22 +170,22 @@ public class Inventory : MonoBehaviour
         switch (itemType)
         {
             case ItemsType.Weapon:
-                WeaponInv[id]--;
+                WeaponInv[id].Stack--;
                 break;
             case ItemsType.Armour:
-                ArmourInv[id]--;
+                ArmourInv[id].Stack--;
                 break;
             case ItemsType.Consumable:
-                ConsumableInv[id]--;
+                ConsumableInv[id].Stack--;
                 break;
             case ItemsType.Ingredient:
-                IngredientInv[id]--;
+                IngredientInv[id].Stack--;
                 break;
             case ItemsType.Quest:
-                QuestInv[id]--;
+                QuestInv[id].Stack--;
                 break;
             case ItemsType.Miscellaneous:
-                MiscellaneousInv[id]--;
+                MiscellaneousInv[id].Stack--;
                 break;
         }
     }

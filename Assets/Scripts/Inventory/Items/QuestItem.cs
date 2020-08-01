@@ -8,7 +8,7 @@ public class QuestItem : Item
     public int BaseMinDamage { get; protected set; }
     public int BaseMaxDamage { get; protected set; }
 
-    public QuestItem(string[] Data)
+    public void Initialise(string[] Data)
     {
         ID = int.Parse(Data[0]);
         Name = Data[1];

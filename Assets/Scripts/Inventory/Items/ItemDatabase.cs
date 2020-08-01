@@ -9,7 +9,9 @@ public class ItemDatabase: MonoBehaviour
     private static ItemDatabase ItemDB = null;
 
     // Item Databases
-    private List<Item> Items = new List<Item>();
+    private Dictionary<int, string[]> Weapons     = new Dictionary<int, string[]>();
+    private Dictionary<int, string[]> Armours     = new Dictionary<int, string[]>();
+    private Dictionary<int, string[]> Consumables = new Dictionary<int, string[]>();
 
     // Item data lookup variables
     private List<string> ItemList = new List<string>();
@@ -79,20 +81,41 @@ public class ItemDatabase: MonoBehaviour
             switch(Type)
             {
                 case "Weapons":
-                    Items.Add(Weapon.CreateInstance(ItemData));
+                    Weapons.Add(int.Parse(ItemData[0]), ItemData);
                     break;
                 case "Armours":
-                    Items.Add(Armour.CreateInstance(ItemData));
+                    Armours.Add(int.Parse(ItemData[0]), ItemData);
                     break;
                 case "Consumables":
-                    Items.Add(Consumable.CreateInstance(ItemData));
+                    Consumables.Add(int.Parse(ItemData[0]), ItemData);
                     break;
             }
         }
     }
 
-    public Item GetItem(int ID, ItemsType type)
+    public string[] GetItem(int ID, ItemsType type)
     {
-        return Items.Find(item => item.ID == ID && item.Type == type);
+        switch (type)
+        {
+            case ItemsType.Weapon:
+                return Weapons[ID];
+            case ItemsType.Armour:
+                return Armours[ID];
+            case ItemsType.Consumable:
+                return Consumables[ID];
+            default: return null;
+        }
+
+        
     }
+
+    //public Armour GetArmourItem(int ID)
+    //{
+    //    return Armours.Find(item => item.ID == ID);
+    //}
+
+    //public Consumable GetConsumableItem(int ID)
+    //{
+    //    return Consumables.Find(item => item.ID == ID);
+    //}
 }

@@ -20,12 +20,4 @@ public class Consumable : Item
         Value = int.Parse(data[6]);
         PrefabDir = data[7];
     }
-
-    public static Consumable CreateInstance(string[] data)
-    {
-        Consumable instance = ScriptableObject.CreateInstance<Consumable>();
-        instance.Initialise(data);
-        return instance;
-    }
-
 }

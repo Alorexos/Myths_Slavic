@@ -32,70 +32,40 @@ public class InventorySlot: MonoBehaviour
         Player.GetComponent<WeaponEquip>().Equip(ItemID);
     }
 
-    public void AddItem(ItemsType itemType, int id, int count)
+    public void AddItem(Item item, ItemsType itemType)
     {
-
+        ItemID = item.ID;
         ItemType = itemType;
-        ItemID = id;
-
-        SlotInfo(ItemDatabase.Instance.GetItem(id, itemType), itemType, count);
-
-        //switch (itemType)
-        //{
-        //    case ItemsType.Weapon:
-               
-        //        break;
-        //    case ItemsType.Armour:
-        //        SetupSlotInfo((Armour)ItemDatabase.Instance.GetItem(id, itemType), count);
-        //        break;
-        //    case ItemsType.Consumable:
-        //        SetupSlotInfo(ItemDatabase.Instance.GetConsumableItem(id), count);
-        //        break;
-        //    case ItemsType.Ingredient:
-        //        //   CreateSlotForIngred();
-        //        break;
-        //    case ItemsType.Quest:
-        //        //     CreateSlotForQuest();
-        //        break;
-        //    case ItemsType.Miscellaneous:
-        //        //   CreateSlotForMisc();
-        //        break;
-        //}
-    }
-
-    private void SlotInfo(Item data, ItemsType itemType, int count)
-    {
-        transform.GetChild(0).GetComponent<Text>().text = data.Name;
-        transform.GetChild(1).GetComponent<Text>().text = count.ToString();
-
+        transform.GetChild(0).GetComponent<Text>().text = item.Name;
+        transform.GetChild(1).GetComponent<Text>().text = item.Stack.ToString();
+        SetQuality(item.ItemQuality);
         switch (itemType)
         {
             case ItemsType.Weapon:
-                SlotInfoExtra((Weapon)data);
+                SlotInfoExtra((Weapon)item);
                 break;
             case ItemsType.Armour:
-                SlotInfoExtra((Armour)data);
+                SlotInfoExtra((Armour)item);
                 break;
             case ItemsType.Consumable:
-                SlotInfoExtra((Consumable)data);
+                SlotInfoExtra((Consumable)item);
                 break;
         }
-        SetQuality(data.ItemQuality);
     }
 
-    private void SlotInfoExtra(Weapon data)
+    private void SlotInfoExtra(Weapon item)
     {
-        transform.GetChild(2).GetComponent<Text>().text = data.BaseMinDamage.ToString();
-        transform.GetChild(3).GetComponent<Text>().text = data.BaseMaxDamage.ToString();
+        transform.GetChild(2).GetComponent<Text>().text = item.BaseMinDamage.ToString();
+        transform.GetChild(3).GetComponent<Text>().text = item.BaseMaxDamage.ToString();
     }
 
-    private void SlotInfoExtra(Armour data)
+    private void SlotInfoExtra(Armour item)
     {
-        transform.GetChild(2).GetComponent<Text>().text = data.Defence.ToString();
+        transform.GetChild(2).GetComponent<Text>().text = item.Defence.ToString();
         transform.GetChild(3).GetComponent<Text>().text = "";
     }
     
-    private void SlotInfoExtra(Consumable data)
+    private void SlotInfoExtra(Consumable item)
     {
         transform.GetChild(2).GetComponent<Text>().text = "";
         transform.GetChild(3).GetComponent<Text>().text = "";

@@ -8,7 +8,7 @@ public class Ingredient : Item
     public int BaseMinDamage { get; protected set; }
     public int BaseMaxDamage { get; protected set; }
 
-    public Ingredient(string[] Data)
+    public void Initialise(string[] Data)
     {
         ID = int.Parse(Data[0]);
         Name = Data[1];
