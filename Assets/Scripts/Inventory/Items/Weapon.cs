@@ -8,15 +8,22 @@ public class Weapon : Item
     public int BaseMinDamage { get; protected set; }
     public int BaseMaxDamage { get; protected set; }
 
-    public Weapon(string[] Data)
+    private void Initialise(string[] data)
     {
-        ID = int.Parse(Data[0]);
-        Name = Data[1];
-        WeaponType = Data[2];
-        ItemQuality = Data[3];
-        Description = Data[4];
-        BaseMinDamage = int.Parse(Data[5]);
-        BaseMaxDamage = int.Parse(Data[6]);
-        PrefabDir = Data[7];
+        ID = int.Parse(data[0]);
+        Type = ItemsType.Weapon;
+        Name = data[1];
+        WeaponType = data[2];
+        ItemQuality = data[3];
+        Description = data[4];
+        BaseMinDamage = int.Parse(data[5]);
+        BaseMaxDamage = int.Parse(data[6]);
+        PrefabDir = data[7];
+    }
+    public static Weapon CreateInstance(string[] data)
+    {
+        Weapon instance = ScriptableObject.CreateInstance<Weapon>();
+        instance.Initialise(data);
+        return instance;
     }
 }

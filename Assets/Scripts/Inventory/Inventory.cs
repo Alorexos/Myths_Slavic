@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Security.Permissions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +20,6 @@ public class Inventory : MonoBehaviour
 {
     public GameObject ItemSlotPrefab;
     public GameObject Content;
-    public ToggleGroup ItemSlotToggleGroup;
 
     private int PosX = 0;
     private int PosY = 0;
@@ -75,7 +76,7 @@ public class Inventory : MonoBehaviour
         }
         // TESTING CODE
 
-        CreateInventorySlotsinWindow("Weapons");
+        CreateInventorySlotsinWindow(ItemsType.Weapon);
     }
 
     // Update is called once per frame
@@ -87,25 +88,25 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void CreateInventorySlotsinWindow(string itemsType)
+    public void CreateInventorySlotsinWindow(ItemsType itemsType)
     {
-        ItemsType ItemsType = (ItemsType)System.Enum.Parse(typeof(ItemsType), itemsType);
-
         for (int i = 0; i < Content.transform.childCount; i++)
         {
             GameObject.Destroy(Content.transform.GetChild(i).gameObject);
         }
 
-        switch (ItemsType)
+        switch (itemsType)
         {
             case ItemsType.Weapon:
-                CreateSlots(WeaponInv, ItemsType);
+                //WeaponInv = SortAlphabetically(WeaponInv);
+                CreateSlots(WeaponInv, itemsType);
                 break;
             case ItemsType.Armour:
-                CreateSlots(ArmourInv, ItemsType);
+
+                CreateSlots(ArmourInv, itemsType);
                 break;
             case ItemsType.Consumable:
-                CreateSlots(ConsumableInv, ItemsType);
+                CreateSlots(ConsumableInv, itemsType);
                 break;
             case ItemsType.Ingredient:
              //   CreateSlotForIngred();
@@ -128,7 +129,6 @@ public class Inventory : MonoBehaviour
             ItemID = inventory.Keys.ElementAt(i);
             ItemSlot = Instantiate(ItemSlotPrefab);
             ItemSlot.name = "InvItem_" + i;
-            //ItemSlot.GetComponent<Toggle>().group = ItemSlotToggleGroup;
             ItemSlot.transform.SetParent(Content.transform, false);
             ItemSlot.GetComponent<RectTransform>().localPosition = new Vector3(PosX, PosY, 0.0f);
             PosY -= (int)ItemSlot.GetComponent<RectTransform>().rect.height;
@@ -136,15 +136,102 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemType, int id)
+    public void AddItem(ItemsType itemType, int id)
     {
-       // ItemDatabase.Instance.GetWeaponItem(id).Count++;
+        switch (itemType)
+        {
+            case ItemsType.Weapon:
+                WeaponInv[id]++;
+                break;
+            case ItemsType.Armour:
+                ArmourInv[id]++;
+                break;
+            case ItemsType.Consumable:
+                ConsumableInv[id]++;
+                break;
+            case ItemsType.Ingredient:
+                IngredientInv[id]++;
+                break;
+            case ItemsType.Quest:
+                QuestInv[id]++;
+                break;
+            case ItemsType.Miscellaneous:
+                MiscellaneousInv[id]++;
+                break;
+        }
     }
 
-    public void RemoveItem(string itemType, int id)
+    public void RemoveItem(ItemsType itemType, int id)
     {
-      //  ItemDatabase.Instance.GetWeaponItem(id).Count--;
+        switch (itemType)
+        {
+            case ItemsType.Weapon:
+                WeaponInv[id]--;
+                break;
+            case ItemsType.Armour:
+                ArmourInv[id]--;
+                break;
+            case ItemsType.Consumable:
+                ConsumableInv[id]--;
+                break;
+            case ItemsType.Ingredient:
+                IngredientInv[id]--;
+                break;
+            case ItemsType.Quest:
+                QuestInv[id]--;
+                break;
+            case ItemsType.Miscellaneous:
+                MiscellaneousInv[id]--;
+                break;
+        }
     }
+
+    //private Dictionary<int, int> SortAlphabetically(Dictionary<int, int> inventory)
+    //{
+    //    Dictionary<int, int> Temp = new Dictionary<int, int>();
+    //    string CurrVal;
+    //    string NextVal;
+    //    int CurrKey;
+    //    int NextKey;
+
+    //    int EmebrgencyCnt = 0;
+
+    //    do
+    //    {
+    //        CurrVal = "";
+    //        CurrKey = 0;
+
+    //        for (int i = 0; i < inventory.Count; i++)
+    //        {
+    //            NextKey = inventory.Keys.ElementAt(i);
+    //            NextVal = ItemDatabase.Instance.GetWeaponItem(NextKey).Name;
+
+    //            if (CurrVal == "")
+    //            {
+    //                CurrVal = NextVal;
+    //                CurrKey = NextKey;
+    //            }
+    //            else if (NextVal.CompareTo(CurrVal) < 0) 
+    //            {
+    //                CurrVal = NextVal;
+    //                CurrKey = NextKey;
+    //            }
+    //        }
+
+    //        if (CurrKey != 0)
+    //        {
+    //            Temp.Add(CurrKey, inventory[CurrKey]);
+    //            inventory.Remove(CurrKey);
+    //        }
+
+    //        EmebrgencyCnt++;
+    //        if (EmebrgencyCnt > 5000)
+    //            break;
+
+    //    } while (inventory.Count > 0);
+
+    //    return Temp; 
+    //}
 
     private void ViewInventory()
     {
@@ -157,20 +244,6 @@ public class Inventory : MonoBehaviour
         else
         {
             InvCanvas.enabled = true;
-        }
-    }
-
-    private ItemsType ParseEnum(string value)
-    {
-        try
-        {
-            return (ItemsType)System.Enum.Parse(typeof(ItemsType),value);
-            //Foo(enumerable); //Now you have your enum, do whatever you want.
-        }
-        catch (System.Exception)
-        {
-            Debug.LogErrorFormat("Parse: Can't convert {0} to enum, please check the spell.", value);
-            return ItemsType.Weapon;
         }
     }
 }

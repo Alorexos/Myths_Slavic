@@ -4,9 +4,10 @@ using System.Dynamic;
 using UnityEngine;
 using System.IO;
 
-public class Item
+public class Item: ScriptableObject
 {
     public int ID { get; protected set; }
+    public ItemsType Type { get; protected set; }
     public string Name { get; protected set; }
     public string Description { get; protected set; }
     public string ItemQuality { get; protected set; }

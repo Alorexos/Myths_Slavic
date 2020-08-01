@@ -8,15 +8,24 @@ public class Consumable : Item
     public string Effect { get; protected set; }
     public int Value { get; protected set; }
 
-    public Consumable(string[] Data)
+    public void Initialise(string[] data)
     {
-        ID = int.Parse(Data[0]);
-        Name = Data[1];
-        ConsumableType = Data[2];
-        ItemQuality = Data[3];
-        Description = Data[4];
-        Effect = Data[5];
-        Value = int.Parse(Data[6]);
-        PrefabDir = Data[7];
+        ID = int.Parse(data[0]);
+        Type = ItemsType.Consumable;
+        Name = data[1];
+        ConsumableType = data[2];
+        ItemQuality = data[3];
+        Description = data[4];
+        Effect = data[5];
+        Value = int.Parse(data[6]);
+        PrefabDir = data[7];
     }
+
+    public static Consumable CreateInstance(string[] data)
+    {
+        Consumable instance = ScriptableObject.CreateInstance<Consumable>();
+        instance.Initialise(data);
+        return instance;
+    }
+
 }

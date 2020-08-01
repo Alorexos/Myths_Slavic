@@ -40,8 +40,8 @@ public class WeaponEquip : MonoBehaviour
     {
         if (Weapon != null)
             Unequip();
-        Debug.Log("Equiping: " + ItemDatabase.Instance.GetWeaponItem(id).PrefabDir);
-        Weapon = Instantiate(Resources.Load(ItemDatabase.Instance.GetWeaponItem(id).PrefabDir), RightHandItem.transform) as GameObject;
+ //       Debug.Log("Equiping: " + ItemDatabase.Instance.GetWeaponItem(id).PrefabDir);
+ //       Weapon = Instantiate(Resources.Load(ItemDatabase.Instance.GetWeaponItem(id).PrefabDir), RightHandItem.transform) as GameObject;
        //Weapon.GetComponent<Weapon>().SetupWeapon(int.Parse(parsedList[0]), parsedList[1], int.Parse(parsedList[2]), int.Parse(parsedList[3]));
     }
 

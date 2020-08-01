@@ -9,9 +9,7 @@ public class ItemDatabase: MonoBehaviour
     private static ItemDatabase ItemDB = null;
 
     // Item Databases
-    private List<Weapon> Weapons = new List<Weapon>();
-    private List<Armour> Armours = new List<Armour>();
-    private List<Consumable> Consumables = new List<Consumable>();
+    private List<Item> Items = new List<Item>();
 
     // Item data lookup variables
     private List<string> ItemList = new List<string>();
@@ -81,30 +79,20 @@ public class ItemDatabase: MonoBehaviour
             switch(Type)
             {
                 case "Weapons":
-                    Weapons.Add(new Weapon(ItemData));
+                    Items.Add(Weapon.CreateInstance(ItemData));
                     break;
                 case "Armours":
-                    Armours.Add(new Armour(ItemData));
+                    Items.Add(Armour.CreateInstance(ItemData));
                     break;
                 case "Consumables":
-                    Consumables.Add(new Consumable(ItemData));
+                    Items.Add(Consumable.CreateInstance(ItemData));
                     break;
             }
         }
     }
 
-    public Weapon GetWeaponItem(int ID)
+    public Item GetItem(int ID, ItemsType type)
     {
-        return Weapons.Find(item => item.ID == ID);
-    }
-
-    public Armour GetArmourItem(int ID)
-    {
-        return Armours.Find(item => item.ID == ID);
-    }
-
-    public Consumable GetConsumableItem(int ID)
-    {
-        return Consumables.Find(item => item.ID == ID);
+        return Items.Find(item => item.ID == ID && item.Type == type);
     }
 }

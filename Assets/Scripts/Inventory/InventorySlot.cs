@@ -38,57 +38,67 @@ public class InventorySlot: MonoBehaviour
         ItemType = itemType;
         ItemID = id;
 
+        SlotInfo(ItemDatabase.Instance.GetItem(id, itemType), itemType, count);
+
+        //switch (itemType)
+        //{
+        //    case ItemsType.Weapon:
+               
+        //        break;
+        //    case ItemsType.Armour:
+        //        SetupSlotInfo((Armour)ItemDatabase.Instance.GetItem(id, itemType), count);
+        //        break;
+        //    case ItemsType.Consumable:
+        //        SetupSlotInfo(ItemDatabase.Instance.GetConsumableItem(id), count);
+        //        break;
+        //    case ItemsType.Ingredient:
+        //        //   CreateSlotForIngred();
+        //        break;
+        //    case ItemsType.Quest:
+        //        //     CreateSlotForQuest();
+        //        break;
+        //    case ItemsType.Miscellaneous:
+        //        //   CreateSlotForMisc();
+        //        break;
+        //}
+    }
+
+    private void SlotInfo(Item data, ItemsType itemType, int count)
+    {
+        transform.GetChild(0).GetComponent<Text>().text = data.Name;
+        transform.GetChild(1).GetComponent<Text>().text = count.ToString();
+
         switch (itemType)
         {
             case ItemsType.Weapon:
-                SetupSlotInfo(ItemDatabase.Instance.GetWeaponItem(id), count);
+                SlotInfoExtra((Weapon)data);
                 break;
             case ItemsType.Armour:
-                SetupSlotInfo(ItemDatabase.Instance.GetArmourItem(id), count);
+                SlotInfoExtra((Armour)data);
                 break;
             case ItemsType.Consumable:
-                SetupSlotInfo(ItemDatabase.Instance.GetConsumableItem(id), count);
-                break;
-            case ItemsType.Ingredient:
-                //   CreateSlotForIngred();
-                break;
-            case ItemsType.Quest:
-                //     CreateSlotForQuest();
-                break;
-            case ItemsType.Miscellaneous:
-                //   CreateSlotForMisc();
+                SlotInfoExtra((Consumable)data);
                 break;
         }
+        SetQuality(data.ItemQuality);
     }
 
-    private void SetupSlotInfo(Weapon data, int count)
+    private void SlotInfoExtra(Weapon data)
     {
-        transform.GetChild(0).GetComponent<Text>().text = data.Name;
-        transform.GetChild(1).GetComponent<Text>().text = count.ToString();
         transform.GetChild(2).GetComponent<Text>().text = data.BaseMinDamage.ToString();
         transform.GetChild(3).GetComponent<Text>().text = data.BaseMaxDamage.ToString();
-
-        SetQuality(data.ItemQuality);
     }
 
-
-    private void SetupSlotInfo(Armour data, int count)
+    private void SlotInfoExtra(Armour data)
     {
-        transform.GetChild(0).GetComponent<Text>().text = data.Name;
-        transform.GetChild(1).GetComponent<Text>().text = count.ToString();
         transform.GetChild(2).GetComponent<Text>().text = data.Defence.ToString();
         transform.GetChild(3).GetComponent<Text>().text = "";
-
-        SetQuality(data.ItemQuality);
     }
-
-    private void SetupSlotInfo(Consumable data, int count)
+    
+    private void SlotInfoExtra(Consumable data)
     {
-        transform.GetChild(0).GetComponent<Text>().text = data.Name;
-        transform.GetChild(1).GetComponent<Text>().text = count.ToString();
+        transform.GetChild(2).GetComponent<Text>().text = "";
         transform.GetChild(3).GetComponent<Text>().text = "";
-
-        SetQuality(data.ItemQuality);
     }
 
     //private void SetupSlotInfo()
