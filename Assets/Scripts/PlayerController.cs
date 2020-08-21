@@ -162,18 +162,21 @@ public class PlayerController : MonoBehaviour
 
 
         // Forward 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            playeranim.SetTrigger("Walk_Forward");
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.velocity = transform.forward * speed;
-        }
         if (Input.GetKeyUp(KeyCode.W))
         {
             playeranim.SetTrigger("Halt");
         }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            playeranim.SetTrigger("Walk_Forward");
+        }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb.AddForce(transform.forward * speed);
+        }
+
 
 
 
