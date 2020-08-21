@@ -25,7 +25,8 @@ public class Inventory : MonoBehaviour
     private int PosX = 0;
     private int PosY = 0;
 
-    private int TempID;
+    private ItemsType CurrentInventory;
+    Canvas InvCanvas;
 
     // Inventory Lists
     private Dictionary<int, Item> WeaponInv        = new Dictionary<int, Item>();
@@ -38,48 +39,20 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        InvCanvas = GameObject.Find("Inventory").GetComponent<Canvas>();
         // TESTING CODE - This will be reading from save file if anything
         for (int i = 0; i < 50; i++)
         {
-            TempID = Random.Range(1, 11);
-            if (WeaponInv.ContainsKey(TempID))
-            {
-                WeaponInv[TempID].Stack++;
-            }
-            else
-             {
-                Weapon temp = ScriptableObject.CreateInstance<Weapon>();
-                temp.Initialise(ItemDatabase.Instance.GetItem(TempID, ItemsType.Weapon));
-                WeaponInv.Add(temp.ID, temp);
-            }
+            AddItem(ItemsType.Weapon, Random.Range(1, 11));
         }
         for (int i = 0; i < 100; i++)
         {
-            TempID = Random.Range(1, 25);
-            if (ArmourInv.ContainsKey(TempID))
-            {
-                ArmourInv[TempID].Stack++;
-            }
-            else
-            {
-                Armour temp = ScriptableObject.CreateInstance<Armour>();
-                temp.Initialise(ItemDatabase.Instance.GetItem(TempID, ItemsType.Armour));
-                ArmourInv.Add(temp.ID, temp);
-            }
+            AddItem(ItemsType.Armour, Random.Range(1, 25));
         }
         for (int i = 0; i < 100; i++)
         {
-            TempID = Random.Range(1, 3);
-            if (ConsumableInv.ContainsKey(TempID))
-            {
-                ConsumableInv[TempID].Stack++;
-            }
-            else
-            {
-                Consumable temp = ScriptableObject.CreateInstance<Consumable>();
-                temp.Initialise(ItemDatabase.Instance.GetItem(TempID, ItemsType.Consumable));
-                ConsumableInv.Add(temp.ID, temp);
-            }
+            AddItem(ItemsType.Consumable, Random.Range(1, 3));
         }
         // TESTING CODE
 
@@ -93,39 +66,26 @@ public class Inventory : MonoBehaviour
         {
             ViewInventory();
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            AddItem(ItemsType.Consumable, 1);
+        }
     }
 
-    public void CreateInventorySlotsinWindow(ItemsType itemsType)
+    public void CreateInventorySlotsinWindow(ItemsType itemType)
     {
         for (int i = 0; i < Content.transform.childCount; i++)
         {
             GameObject.Destroy(Content.transform.GetChild(i).gameObject);
         }
 
-        switch (itemsType)
-        {
-            case ItemsType.Weapon:
-                //WeaponInv = SortAlphabetically(WeaponInv);
-                CreateSlots(WeaponInv, itemsType);
-                break;
-            case ItemsType.Armour:
-                 CreateSlots(ArmourInv, itemsType);
-                break;
-            case ItemsType.Consumable:
-                CreateSlots(ConsumableInv, itemsType);
-                break;
-            case ItemsType.Ingredient:
-                CreateSlots(IngredientInv, itemsType);
-                break;
-            case ItemsType.Quest:
-                CreateSlots(QuestInv, itemsType);
-                break;
-            case ItemsType.Miscellaneous:
-                CreateSlots(MiscellaneousInv, itemsType);
-                break;
-        }
+        Dictionary<int, Item> InvRef = SelectInventory(itemType);
+        InvRef = SortAlphabetically(InvRef);
+        CreateSlots(InvRef);
+        CurrentInventory = itemType;
     }
-    private void CreateSlots(Dictionary<int, Item> inventory, ItemsType itemsType)
+    private void CreateSlots(Dictionary<int, Item> inventory)
     {
         GameObject ItemSlot;
 
@@ -136,111 +96,131 @@ public class Inventory : MonoBehaviour
             ItemSlot.transform.SetParent(Content.transform, false);
             ItemSlot.GetComponent<RectTransform>().localPosition = new Vector3(PosX, PosY, 0.0f);
             PosY -= (int)ItemSlot.GetComponent<RectTransform>().rect.height;
-            ItemSlot.GetComponent<InventorySlot>().AddItem(inventory.Values.ElementAt(i), itemsType);
+            ItemSlot.GetComponent<InventorySlot>().AddSlot(inventory.Values.ElementAt(i));
         }
     }
 
     public void AddItem(ItemsType itemType, int id)
     {
+        Dictionary<int, Item> InvRef = SelectInventory(itemType);
+
+        if (InvRef.ContainsKey(id))
+        {
+            InvRef[id].Stack++;
+        }
+        else
+        {
+            CreateInventoryItem(itemType, id, ref InvRef);
+        }
+
+        if (InvCanvas.enabled)
+        {
+            CreateInventorySlotsinWindow(CurrentInventory);
+        }
+    }
+
+    private void CreateInventoryItem(ItemsType itemType, int id, ref Dictionary<int, Item> inventory)
+    {
+        dynamic TempItem;
+
         switch (itemType)
         {
             case ItemsType.Weapon:
-                WeaponInv[id].Stack++;
+                TempItem = ScriptableObject.CreateInstance<Weapon>();
+                TempItem.Initialise(id);
+                inventory.Add(id, TempItem);
                 break;
             case ItemsType.Armour:
-                ArmourInv[id].Stack++;
+                TempItem = ScriptableObject.CreateInstance<Armour>();
+                TempItem.Initialise(id);
+                inventory.Add(id, TempItem);
                 break;
             case ItemsType.Consumable:
-                ConsumableInv[id].Stack++;
+                TempItem = ScriptableObject.CreateInstance<Consumable>();
+                TempItem.Initialise(id);
+                inventory.Add(id, TempItem);
                 break;
             case ItemsType.Ingredient:
-                IngredientInv[id].Stack++;
+                TempItem = ScriptableObject.CreateInstance<Ingredient>();
+                TempItem.Initialise(id);
+                inventory.Add(id, TempItem);
                 break;
             case ItemsType.Quest:
-                QuestInv[id].Stack++;
+                TempItem = ScriptableObject.CreateInstance<QuestItem>();
+                TempItem.Initialise(id);
+                inventory.Add(id, TempItem);
                 break;
             case ItemsType.Miscellaneous:
-                MiscellaneousInv[id].Stack++;
+                TempItem = ScriptableObject.CreateInstance<Miscellaneous>();
+                TempItem.Initialise(id);
+                inventory.Add(id, TempItem);
                 break;
+        }
+    }
+
+    public void AddItem(Item item)
+    {
+        Dictionary<int, Item> InvRef = SelectInventory(item.Type);
+
+        if(InvRef.ContainsKey(item.ID))
+        {
+            InvRef[item.ID].Stack++;
+        }
+        else
+        {
+            InvRef.Add(item.ID, item);
+        }
+
+        if (InvCanvas.enabled)
+        {
+            CreateInventorySlotsinWindow(CurrentInventory);
         }
     }
 
     public void RemoveItem(ItemsType itemType, int id)
     {
+        Dictionary<int, Item> InvRef = SelectInventory(itemType);
+        InvRef[id].Stack--;
+
+        if(InvRef[id].Stack == 0)
+        {
+            InvRef.Remove(id);
+        }
+
+        if (InvCanvas.enabled)
+        {
+            CreateInventorySlotsinWindow(CurrentInventory);
+        }
+    }
+    private ref Dictionary<int, Item> SelectInventory(ItemsType itemType)
+    {
         switch (itemType)
         {
             case ItemsType.Weapon:
-                WeaponInv[id].Stack--;
-                break;
+                return ref WeaponInv;
             case ItemsType.Armour:
-                ArmourInv[id].Stack--;
-                break;
+                return ref ArmourInv;
             case ItemsType.Consumable:
-                ConsumableInv[id].Stack--;
-                break;
+                return ref ConsumableInv;
             case ItemsType.Ingredient:
-                IngredientInv[id].Stack--;
-                break;
+                return ref IngredientInv;
             case ItemsType.Quest:
-                QuestInv[id].Stack--;
-                break;
+                return ref QuestInv;
             case ItemsType.Miscellaneous:
-                MiscellaneousInv[id].Stack--;
-                break;
+                return ref MiscellaneousInv;
+            default:
+                return ref WeaponInv;
         }
     }
 
-    //private Dictionary<int, int> SortAlphabetically(Dictionary<int, int> inventory)
-    //{
-    //    Dictionary<int, int> Temp = new Dictionary<int, int>();
-    //    string CurrVal;
-    //    string NextVal;
-    //    int CurrKey;
-    //    int NextKey;
-
-    //    int EmebrgencyCnt = 0;
-
-    //    do
-    //    {
-    //        CurrVal = "";
-    //        CurrKey = 0;
-
-    //        for (int i = 0; i < inventory.Count; i++)
-    //        {
-    //            NextKey = inventory.Keys.ElementAt(i);
-    //            NextVal = ItemDatabase.Instance.GetWeaponItem(NextKey).Name;
-
-    //            if (CurrVal == "")
-    //            {
-    //                CurrVal = NextVal;
-    //                CurrKey = NextKey;
-    //            }
-    //            else if (NextVal.CompareTo(CurrVal) < 0) 
-    //            {
-    //                CurrVal = NextVal;
-    //                CurrKey = NextKey;
-    //            }
-    //        }
-
-    //        if (CurrKey != 0)
-    //        {
-    //            Temp.Add(CurrKey, inventory[CurrKey]);
-    //            inventory.Remove(CurrKey);
-    //        }
-
-    //        EmebrgencyCnt++;
-    //        if (EmebrgencyCnt > 5000)
-    //            break;
-
-    //    } while (inventory.Count > 0);
-
-    //    return Temp; 
-    //}
+    private Dictionary<int, Item> SortAlphabetically(Dictionary<int, Item> inventory)
+    {
+        Dictionary<int, Item> Temp = new Dictionary<int, Item>();
+        return inventory.OrderBy(i => i.Value.Name).ToDictionary(i => i.Key, i => i.Value);
+    }
 
     private void ViewInventory()
     {
-        Canvas InvCanvas = GameObject.Find("Inventory").GetComponent<Canvas>();
-
         if(InvCanvas.enabled)
         {
             InvCanvas.enabled = false; 

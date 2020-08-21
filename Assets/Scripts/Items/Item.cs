@@ -14,4 +14,6 @@ public class Item: ScriptableObject
     public string ItemQuality { get; protected set; }
     public string PrefabDir { get; protected set; }
 
+    protected string[] Data;
+
 }

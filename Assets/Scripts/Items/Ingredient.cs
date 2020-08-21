@@ -8,9 +8,11 @@ public class Ingredient : Item
     public int BaseMinDamage { get; protected set; }
     public int BaseMaxDamage { get; protected set; }
 
-    public void Initialise(string[] Data)
+    public void Initialise(int id)
     {
-        ID = int.Parse(Data[0]);
+        ID = id;
+        Type = ItemsType.Ingredient;
+        Data = ItemDatabase.Instance.GetItem(id, Type);
         Name = Data[1];
         Description = Data[2];
         ItemQuality = Data[3];

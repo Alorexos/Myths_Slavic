@@ -8,16 +8,17 @@ public class Consumable : Item
     public string Effect { get; protected set; }
     public int Value { get; protected set; }
 
-    public void Initialise(string[] data)
+    public void Initialise(int id)
     {
-        ID = int.Parse(data[0]);
+        ID = id;
         Type = ItemsType.Consumable;
-        Name = data[1];
-        ConsumableType = data[2];
-        ItemQuality = data[3];
-        Description = data[4];
-        Effect = data[5];
-        Value = int.Parse(data[6]);
-        PrefabDir = data[7];
+        Data = ItemDatabase.Instance.GetItem(id, Type);
+        Name = Data[1];
+        ConsumableType = Data[2];
+        ItemQuality = Data[3];
+        Description = Data[4];
+        Effect = Data[5];
+        Value = int.Parse(Data[6]);
+        PrefabDir = Data[7];
     }
 }

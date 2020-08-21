@@ -1,21 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class InventorySlot: MonoBehaviour
+public class InventorySlot: MonoBehaviour, IPointerClickHandler
 {
-    private int ItemID;
-    private ItemsType ItemType;
     private GameObject Player;
+    private Item SlotItem; 
 
     // Start is called before the first frame update
-    void Awake()
-    {
-        gameObject.GetComponent<Button>().onClick.AddListener(ItemEquip);
-    }
-
     void Start()
     {
         Player = GameObject.Find("Player");
@@ -24,22 +16,32 @@ public class InventorySlot: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            Player.GetComponent<EquipmentManager>().Equip(SlotItem, EquipmentSlot.LeftHand);
+        }
+        else if (eventData.button == PointerEventData.InputButton.Middle)
+        {
+            Debug.Log("Middle click");
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            Player.GetComponent<EquipmentManager>().Equip(SlotItem, EquipmentSlot.RightHand);
+            
+        }
     }
 
-    private void ItemEquip()
+    public void AddSlot(Item item)
     {
-        Player.GetComponent<WeaponEquip>().Equip(ItemID);
-    }
-
-    public void AddItem(Item item, ItemsType itemType)
-    {
-        ItemID = item.ID;
-        ItemType = itemType;
+        SlotItem = item;
         transform.GetChild(0).GetComponent<Text>().text = item.Name;
         transform.GetChild(1).GetComponent<Text>().text = item.Stack.ToString();
         SetQuality(item.ItemQuality);
-        switch (itemType)
+
+        switch (item.Type)
         {
             case ItemsType.Weapon:
                 SlotInfoExtra((Weapon)item);

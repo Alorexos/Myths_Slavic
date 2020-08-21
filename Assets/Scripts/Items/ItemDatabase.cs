@@ -108,14 +108,4 @@ public class ItemDatabase: MonoBehaviour
 
         
     }
-
-    //public Armour GetArmourItem(int ID)
-    //{
-    //    return Armours.Find(item => item.ID == ID);
-    //}
-
-    //public Consumable GetConsumableItem(int ID)
-    //{
-    //    return Consumables.Find(item => item.ID == ID);
-    //}
 }

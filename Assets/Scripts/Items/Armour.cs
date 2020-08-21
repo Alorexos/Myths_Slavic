@@ -8,15 +8,16 @@ public class Armour : Item
     public int Defence { get; protected set; }
     public int BaseMaxDamage { get; protected set; }
 
-    public void Initialise(string[] data)
+    public void Initialise(int id)
     {
-        ID = int.Parse(data[0]);
+        ID = id;
         Type = ItemsType.Armour;
-        Name = data[1];
-        ArmourType = data[2];
-        ItemQuality = data[3];
-        Description = data[4];
-        Defence = int.Parse(data[5]);
-        PrefabDir = data[6];
+        Data = ItemDatabase.Instance.GetItem(id, Type);
+        Name = Data[1];
+        ArmourType = Data[2];
+        ItemQuality = Data[3];
+        Description = Data[4];
+        Defence = int.Parse(Data[5]);
+        PrefabDir = Data[6];
     }
 }
