@@ -4,202 +4,161 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rb;
-    Animator playeranim;
+    //public float turnSpeed = 10.0f;
+    //public float moveSpeed = 10.0f;
+    //public float mouseTurnMultiplier = 1;
+
+    //private float x;
+    //private float z ;
+    //void Update()
+    //{
+    //    // x is used for the x axis.  set it to zero so it doesn't automatically rotate
+    //    x = 0;
+
+    //    // check to see if the W or S key is being pressed.  
+    //    z = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
+
+    //    // Move the character forwards or backwards
+    //    transform.Translate(0, 0, z);
+
+    //        // Get the A or S key (-1 or 1)
+    //        x = Input.GetAxis("Horizontal");
+
+    //    // Check to see if the right mouse button is pressed
+    //    if (Input.GetMouseButton(1))
+    //    {
+    //        // Get the difference in horizontal mouse movement
+    //        x = Input.GetAxis("Mouse X") * turnSpeed * mouseTurnMultiplier;
+    //    }
+
+    //    // rotate the character based on the x value
+    //    transform.Rotate(0, x, 0);
+    //}
+
+    Rigidbody Rigidbody;
+    public GameObject PlayerCamera;
+
+    ////// Animator playeranim;
+    //////public float speed = 10.0f;
+    public float CameraFolllow = 10.0f;
     public float speed = 10.0f;
+    public float gravity = 10.0f;
+    public float maxVelocityChange = 10.0f;
+    public bool canJump = true;
+    public float jumpHeight = 2.0f;
+    private bool grounded = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private float CameraY;
+
+    void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        if (rb)
-            rb.freezeRotation = true;
-        playeranim = GetComponent<Animator>();
-        originalRotation = transform.localRotation;
+        Rigidbody = GetComponent<Rigidbody>();
+        Rigidbody.freezeRotation = true;
+        Rigidbody.useGravity = false;
     }
 
-    //--------------- Movement Code ----------------
-    public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
-    public RotationAxes axes = RotationAxes.MouseXAndY;
-    public float sensitivityX = 15F;
-    public float sensitivityY = 15F;
-
-    public float minimumX = -360F;
-    public float maximumX = 360F;
-
-    public float minimumY = -60F;
-    public float maximumY = 60F;
-
-    float rotationX = 0F;
-    float rotationY = 0F;
-
-    private List<float> rotArrayX = new List<float>();
-    float rotAverageX = 0F;
-
-    private List<float> rotArrayY = new List<float>();
-    float rotAverageY = 0F;
-
-    public float frameCounter = 20;
-
-    Quaternion originalRotation;
-
-    public static float ClampAngle(float angle, float min, float max)
+    void FixedUpdate()
     {
-        angle = angle % 360;
-        if ((angle >= -360F) && (angle <= 360F))
+        Vector3 targetVelocity = Vector3.zero;
+        Vector3 velocity;
+        Vector3 velocityChange;
+        Quaternion CameraRotation = Quaternion.identity;
+
+        // Character movement
+        if (grounded)
         {
-            if (angle < -360F)
+            // Calculate how fast we should be moving
+            if (Input.GetAxis("Vertical") != 0)
             {
-                angle += 360F;
+                targetVelocity = new Vector3(0, 0, Mathf.Abs(Input.GetAxis("Vertical")));
             }
-            if (angle > 360F)
+
+            if (Input.GetAxis("Horizontal") != 0)
             {
-                angle -= 360F;
+                targetVelocity = new Vector3(0, 0, Mathf.Abs(Input.GetAxis("Horizontal")));
+            }
+
+            //targetVelocity = new Vector3(0, 0, Mathf.Abs(Input.GetAxis("Vertical")));
+            targetVelocity = transform.TransformDirection(targetVelocity);
+            targetVelocity *= speed;
+
+            // Apply a force that attempts to reach our target velocity
+            velocity = Rigidbody.velocity;
+            velocityChange = (targetVelocity - velocity);
+            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            velocityChange.y = 0;
+            Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+
+            // Jump
+            if (canJump && Input.GetButton("Jump"))
+            {
+                Rigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
             }
         }
-        return Mathf.Clamp(angle, min, max);
+
+        // Character rotation
+        if (targetVelocity != Vector3.zero)
+        {
+            // Rotate player to follow camera forward view
+            CameraY = PlayerCamera.transform.rotation.eulerAngles.y;
+            
+            if(Input.GetAxis("Vertical") < 0 )
+            {
+                CameraY = ClampAngle(CameraY - 180.0f);
+            }
+
+            if (Input.GetAxis("Horizontal") < 0)
+            {
+                CameraY = ClampAngle(CameraY - 90.0f);
+            }
+
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                CameraY = ClampAngle(CameraY + 90.0f);
+            }
+
+            CameraRotation.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, CameraY, transform.rotation.eulerAngles.z);
+            transform.rotation = Quaternion.Slerp(transform.rotation, CameraRotation, CameraFolllow * Time.deltaTime);
+        }
+
+
+        // We apply gravity manually for more tuning control
+        Rigidbody.AddForce(new Vector3(0, -gravity * Rigidbody.mass, 0));
+        grounded = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionStay()
     {
-        if (axes == RotationAxes.MouseXAndY)
-        {
-            rotAverageY = 0f;
-            rotAverageX = 0f;
-
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-
-            rotArrayY.Add(rotationY);
-            rotArrayX.Add(rotationX);
-
-            if (rotArrayY.Count >= frameCounter)
-            {
-                rotArrayY.RemoveAt(0);
-            }
-            if (rotArrayX.Count >= frameCounter)
-            {
-                rotArrayX.RemoveAt(0);
-            }
-
-            for (int j = 0; j < rotArrayY.Count; j++)
-            {
-                rotAverageY += rotArrayY[j];
-            }
-            for (int i = 0; i < rotArrayX.Count; i++)
-            {
-                rotAverageX += rotArrayX[i];
-            }
-
-            rotAverageY /= rotArrayY.Count;
-            rotAverageX /= rotArrayX.Count;
-
-            rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
-            rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
-
-            Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
-            Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
-
-            transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-        }
-        else if (axes == RotationAxes.MouseX)
-        {
-            rotAverageX = 0f;
-
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-
-            rotArrayX.Add(rotationX);
-
-            if (rotArrayX.Count >= frameCounter)
-            {
-                rotArrayX.RemoveAt(0);
-            }
-            for (int i = 0; i < rotArrayX.Count; i++)
-            {
-                rotAverageX += rotArrayX[i];
-            }
-            rotAverageX /= rotArrayX.Count;
-
-            rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
-
-            Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
-            transform.localRotation = originalRotation * xQuaternion;
-        }
-        else
-        {
-            rotAverageY = 0f;
-
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-
-            rotArrayY.Add(rotationY);
-
-            if (rotArrayY.Count >= frameCounter)
-            {
-                rotArrayY.RemoveAt(0);
-            }
-            for (int j = 0; j < rotArrayY.Count; j++)
-            {
-                rotAverageY += rotArrayY[j];
-            }
-            rotAverageY /= rotArrayY.Count;
-
-            rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
-
-            Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
-            transform.localRotation = originalRotation * yQuaternion;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = transform.right * speed;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = -transform.right * speed;
-        }
-
-
-        // Forward 
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            playeranim.SetTrigger("Halt");
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            playeranim.SetTrigger("Walk_Forward");
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.AddForce(transform.forward * speed);
-        }
-
-
-
-
-        // Backwards
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.velocity = -transform.forward * speed;
-        }
-
-        // Equip Weapon *** TEMPORARY ***
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    Weapon = Instantiate(WeaponPrefab, RightHandItem.transform) as GameObject;
-        //    Weapon.transform.localPosition = new Vector3(0, 0, 0);
-        //    Weapon.transform.localRotation = Quaternion.identity;
-        //    Weapon.Initialise();
-        //}
-
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            playeranim.SetTrigger("Attack");
-            //Weapon.GetComponent<Collider>().isTrigger = true;
-        }
+        grounded = true;
     }
+
+    float CalculateJumpVerticalSpeed()
+    {
+        // From the jump height and gravity we deduce the upwards speed 
+        // for the character to reach at the apex.
+        return Mathf.Sqrt(2 * jumpHeight * gravity);
+    }
+
+    static float ClampAngle(float angle)
+    {
+        if (angle < -360)
+        {
+            angle += 360;
+        }
+        if (angle > 360)
+        {
+            angle -= 360;
+        }
+        return angle;
+    }
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+
+    //    //if (rb)
+    //    //    rb.freezeRotation = true;
+    //    //playeranim = GetComponent<Animator>();
+    //    //originalRotation = transform.localRotation;
+    //}
 }
